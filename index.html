@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nomenclatura de Aminas</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --success-color: #27ae60;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        h1 {
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+        
+        .container:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .step {
+            display: none;
+            padding: 20px;
+            border-left: 5px solid var(--primary-color);
+            background-color: #f8f9fa;
+            margin-bottom: 20px;
+            border-radius: 0 10px 10px 0;
+            animation: fadeIn 0.5s;
+        }
+        
+        .step.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .step-number {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .step-number::before {
+            content: "";
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: white;
+            text-align: center;
+            line-height: 25px;
+            font-size: 0.8em;
+        }
+        
+        #step1 .step-number::before { content: "1"; }
+        #step2 .step-number::before { content: "2"; }
+        #step3 .step-number::before { content: "3"; }
+        #step4 .step-number::before { content: "4"; }
+        #step5 .step-number::before { content: "5"; }
+        #step6 .step-number::before { content: "6"; }
+        #step7 .step-number::before { content: "7"; }
+        #step8 .step-number::before { content: "8"; }
+        #step9 .step-number::before { content: "9"; }
+        #step10 .step-number::before { content: "10"; }
+        
+        .example {
+            background: linear-gradient(to right, #e8f4fc, #d4e9f8);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #2980b9;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .molecule {
+            font-family: 'Courier New', monospace;
+            background-color: #f1f1f1;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 12px 0;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+        
+        button {
+            background: linear-gradient(to bottom, var(--primary-color), #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: var(--transition);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            background: linear-gradient(to bottom, #2980b9, var(--primary-color));
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .progress-container {
+            margin-bottom: 30px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .progress-bar {
+            height: 12px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-color), #2ecc71);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+        
+        .progress-text {
+            text-align: center;
+            margin-top: 8px;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        .step-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--secondary-color);
+            font-size: 1.1em;
+        }
+        
+        .rule {
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 2px solid #3498db;
+        }
+        
+        .final-result {
+            background: linear-gradient(to right, #d5f5e3, #c8f0d9);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid var(--success-color);
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .step-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .step-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #bdc3c7;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .step-indicator.active {
+            background-color: var(--primary-color);
+            transform: scale(1.2);
+        }
+        
+        .chemistry-icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        <span class="chemistry-icon">⚗️</span>
+        Nomenclatura de Aminas
+        <span class="chemistry-icon">🧪</span>
+    </h1>
+    
+    <div class="container">
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            <div class="progress-text" id="progressText">Paso 1 de 10</div>
+        </div>
+        
+        <div class="step-indicators" id="stepIndicators"></div>
+        
+        <div class="step active" id="step1">
+            <div class="step-number">Identificar la cadena principal</div>
+            <div class="rule">La cadena principal es la más larga que contiene el grupo –NH₂.</div>
+            <div class="example">
+                <div class="step-title">Ejemplo:</div>
+                <div class="molecule">CH₃-CH₂-CH(NH₂)-CH₂-CH₃</div>
+                <p>La cadena principal es de 5 carbonos (pentano) porque contiene el grupo amino.</p>
+            </div>
+        </div>
+        
+        <div class="step" id="step2">
+            <div class="step-number">Nombrar la cadena principal</div>
+            <div class="rule">Se toma el nombre del alcano correspondiente.</div>
+            <div class="example">
+                <div class="step-title">Ejemplo:</div>
+                <p>Para una cadena de 5 carbonos: pentano</p>
+            </div>
+        </div>
+        
+        <div class="step" id="step3">
+            <div class="step-number">Cambiar la terminación "-o" por "-amina"</div>
+            <div class="rule">Ejemplo: etano → etanamina</div>
+            <div class="example">
+                <div class="step-title">Ejemplo:</div>
+                <p>Pentano → pentanamina</p>
+            </div>
+        </div>
+        
+        <div class="step" id="step4">
+            <div class="step-number">Numerar la cadena</div>
+            <div class="rule">El carbono unido al grupo –NH₂ debe tener el número más bajo.</div>
+            <div class="example">
+                <div class="step-title">Ejemplo:</div>
+                <div class="molecule">CH₃-CH₂-CH(NH₂)-CH₂-CH₃</div>
+                <p>Numeramos la cadena de izquierda a derecha: el carbono con -NH₂ es el carbono 3.</p>
+                <p>Numeramos de derecha a izquierda: el carbono con -NH₂ es el carbono 2 (más bajo).</p>
+                <p>Por lo tanto, usamos la numeración que da el número más bajo al grupo amino.</p>
+            </div>
+        </div>
+        
+        <div class="step" id="step5">
+            <div class="step-number">Indicar la posición del grupo –NH₂</div>
+            <div class="rule">Ejemplo: 2-butanamina</div>
+            <div class="example">
+                <div class="step-title">Ejemplo:</div>
+                <p>En nuestro ejemplo, el grupo amino está en el carbono 2: 2-pentanamina</p>
+            </div>
+        </div>
+        
+        <div class="step" id="step6">
+            <div class="step-number">Aminas con varios grupos –NH₂</div>
+            <div class="rule">Usar prefijos di-, tri-, tetra-, etc. Ejemplo: 1,3-propanodiamina</div>
+            <div class="example">
+                <div class="step-title">Ejemplo:</div>
+                <div class="molecule">H₂N-CH₂-CH₂-CH₂-NH₂</div>
+                <p>Esta molécula tiene dos grupos amino en los carbonos 1 y 3: 1,3-propanodiamina</p>
+            </div>
+        </div>
+        
+        <div class="step" id="step7">
+            <div class="step-number">Sustituyentes en el nitrógeno</div>
+            <div class="rule">Usar la letra N- Ejemplo: N-metilpropanamina o N,N-dimetiletanamina</div>
+            <div class="example">
+                <div class="step-title">Ejemplo:</div>
+                <div class="molecule">CH₃-NH-CH₂-CH₂-CH₃</div>
+                <p>Esta molécula tiene un grupo metilo unido al nitrógeno: N-metilpropanamina</div>
+                <div class="molecule">(CH₃)₂N-CH₂-CH₃</div>
+                <p>Esta molécula tiene dos grupos metilo unidos al nitrógeno: N,N-dimetiletanamina</p>
+            </div>
+        </div>
+        
+        <div class="step" id="step8">
+            <div class="step-number">Cuando –NH₂ no es el grupo funcional principal</div>
+            <div class="rule">El –NH₂ se nombra como "amino-" (sustituyente). Ejemplo: 2-aminopropanoico (ácido amino)</div>
+            <div class="example">
+                <div class="step-title">Ejemplo:</div>
+                <div class="molecule">H₂N-CH₂-COOH</div>
+                <p>Esta molécula tiene un grupo carboxilo (más prioritario) y un grupo amino: ácido 2-aminoetanoico</p>
+            </div>
+        </div>
+        
+        <div class="step" id="step9">
+            <div class="step-number">Aminas aromáticas</div>
+            <div class="rule">Se nombran según el anillo + "amina".</div>
+            <div class="example">
+                <div class="step-title">Ejemplos:</div>
+                <div class="molecule">C₆H₅-NH₂</div>
+                <p>Anilina (aminobenceno)</p>
+                <div class="molecule">CH₃-C₆H₄-NH₂ (orto, meta o para)</div>
+                <p>Toluidina (metilanilina)</p>
+                <div class="molecule">H₂N-C₆H₄-COOH</div>
+                <p>Ácido 2-aminobenzoico (antranílico)</p>
+            </div>
+        </div>
+        
+        <div class="step" id="step10">
+            <div class="step-number">Ejemplo completo</div>
+            <div class="example">
+                <div class="step-title">Ejemplo completo:</div>
+                <div class="molecule">CH₃-CH(NH₂)-CH₂-CH(CH₃)-CH₂-CH₃</div>
+                <p>Vamos a nombrar esta amina paso a paso:</p>
+                <ol>
+                    <li>Cadena principal: 6 carbonos (hexano)</li>
+                    <li>Grupo amino: cambiamos a hexanamina</li>
+                    <li>Numeración: el grupo amino está en carbono 2 (más bajo)</li>
+                    <li>También hay un grupo metilo en carbono 4</li>
+                </ol>
+                <div class="final-result">Nombre: 4-metil-2-hexanamina</div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <div class="nav-buttons">
+                <button id="prevBtn" disabled>
+                    <span>←</span> Anterior
+                </button>
+                <button id="nextBtn">
+                    Siguiente <span>→</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const steps = document.querySelectorAll('.step');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const progressBar = document.getElementById('progress');
+            const progressText = document.getElementById('progressText');
+            const stepIndicators = document.getElementById('stepIndicators');
+            
+            let currentStep = 0;
+            const totalSteps = steps.length;
+            
+            // Crear indicadores de pasos
+            for (let i = 0; i < totalSteps; i++) {
+                const indicator = document.createElement('div');
+                indicator.classList.add('step-indicator');
+                if (i === 0) indicator.classList.add('active');
+                indicator.addEventListener('click', () => {
+                    currentStep = i;
+                    showStep(currentStep);
+                });
+                stepIndicators.appendChild(indicator);
+            }
+            
+            function updateButtons() {
+                prevBtn.disabled = currentStep === 0;
+                nextBtn.textContent = currentStep === totalSteps - 1 ? 'Finalizar →' : 'Siguiente →';
+            }
+            
+            function updateProgress() {
+                const progress = ((currentStep + 1) / totalSteps) * 100;
+                progressBar.style.width = `${progress}%`;
+                progressText.textContent = `Paso ${currentStep + 1} de ${totalSteps}`;
+                
+                // Actualizar indicadores
+                document.querySelectorAll('.step-indicator').forEach((indicator, index) => {
+                    if (index === currentStep) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            }
+            
+            function showStep(stepIndex) {
+                steps.forEach(step => step.classList.remove('active'));
+                steps[stepIndex].classList.add('active');
+                updateButtons();
+                updateProgress();
+                
+                // Scroll suave al paso actual
+                steps[stepIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+            
+            prevBtn.addEventListener('click', function() {
+                if (currentStep > 0) {
+                    currentStep--;
+                    showStep(currentStep);
+                }
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                if (currentStep < totalSteps - 1) {
+                    currentStep++;
+                    showStep(currentStep);
+                } else {
+                    // Reiniciar al primer paso
+                    currentStep = 0;
+                    showStep(currentStep);
+                }
+            });
+            
+            // Inicializar
+            showStep(currentStep);
+        });
+    </script>
+</body>
+</html>
